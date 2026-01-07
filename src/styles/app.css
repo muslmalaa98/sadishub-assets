@@ -138,7 +138,6 @@ img{ max-width: 100%; display: block; }
   border-radius: var(--r);
   padding: var(--s3);
 }
-
 .h1{
   margin: 0 0 6px 0;
   font-size: 22px;
@@ -147,22 +146,23 @@ img{ max-width: 100%; display: block; }
 .muted{ margin: 0; color: var(--muted); }
 .page__tools{ margin-top: 12px; display: flex; gap: var(--s1); }
 
-/* ---------- Hero (mcq for all) ---------- */
-.page__head--hero{
+/* ---------- Home Hero (NO home.js changes) ----------
+   Applies only when the page head is directly followed by the grid (home layout) */
+.page__head:has(+ .grid){
   background: linear-gradient(135deg, var(--heroBg1), var(--heroBg2));
   border-color: var(--heroBorder);
   color: var(--heroText);
   text-align: center;
 }
 
-.page__head--hero .h1{
+.page__head:has(+ .grid) .h1{
   font-size: 30px;
   font-weight: 900;
   margin: 0 0 10px 0;
   letter-spacing: 0.2px;
 }
 
-.page__head--hero .muted{
+.page__head:has(+ .grid) .muted{
   color: var(--heroMuted);
   font-size: 16px;
   font-weight: 700;
@@ -176,7 +176,6 @@ img{ max-width: 100%; display: block; }
   gap: var(--s2);
   margin-top: 18px; /* نزّل المربعات شوي */
 }
-
 @media (min-width: 720px){
   .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
