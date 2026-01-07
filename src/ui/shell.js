@@ -114,7 +114,7 @@ export function bootApp(root) {
           )
         );
 
-        setText(document.querySelector("title"), "mcq for all — خطأ");
+        setText(document.querySelector("title"), "MCQs for all — خطأ");
       }
     },
   });
