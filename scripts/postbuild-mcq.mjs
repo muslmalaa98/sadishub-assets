@@ -41,9 +41,11 @@ async function main() {
     await move(from, to);
   }
 
-  // DO NOT write dist/_redirects here.
-  // Redirect rules should live in public/_redirects only.
-  console.log("postbuild: moved build output into dist/mcq (kept dist/_redirects from public/_redirects)");
+  // Cloudflare Pages SPA routing
+  const redirects = ["/mcq /mcq/index.html 200", "/mcq/* /mcq/index.html 200", ""].join("\n");
+  await fs.writeFile(path.join(distDir, "_redirects"), redirects, "utf8");
+
+  console.log("postbuild: moved build output into dist/mcq and generated dist/_redirects");
 }
 
 main().catch((e) => {

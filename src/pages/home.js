@@ -12,8 +12,8 @@ export function pageHome(index) {
 
   const node = el("section", { class: "page" },
     el("div", { class: "page__head" },
-      el("h1", { class: "h1" }, "mcq for all"),
-      el("p", { class: "muted" }, "اختر الكلية ثم المرحلة ثم الكورس ثم المادة.")
+      el("h1", { class: "h1" }, "MCQs for all"),
+      el("p", { class: "muted" }, "أكبر بنك أسئلة لطلبة المجموعة الطبية")
     ),
     el("div", { class: "grid" }, cards)
   );

@@ -1,3 +1,6 @@
+/* Cairo (Arabic UI font) */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap");
+
 /* ---------- Design Tokens ---------- */
 :root{
   --bg: #f6f7fb;
@@ -22,6 +25,13 @@
   --s3: 24px;
   --s4: 32px;
 
+  /* Hero (mcq for all) - Light mode */
+  --heroBg1: #0b4a3f;   /* اخضر غامق */
+  --heroBg2: #073b4a;   /* ازرق غامق */
+  --heroBorder: rgba(255, 255, 255, 0.14);
+  --heroText: #ffffff;
+  --heroMuted: rgba(255, 255, 255, 0.78);
+
   color-scheme: light;
 }
 
@@ -39,6 +49,13 @@
   --danger: #ef4444;
   --focusRing: rgba(96, 165, 250, 0.35);
 
+  /* Hero (mcq for all) - Dark mode */
+  --heroBg1: #0a3e4b;
+  --heroBg2: #072b38;
+  --heroBorder: rgba(255, 255, 255, 0.16);
+  --heroText: #ffffff;
+  --heroMuted: rgba(255, 255, 255, 0.78);
+
   color-scheme: dark;
 }
 
@@ -49,7 +66,7 @@ body{
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, "Noto Sans Arabic", sans-serif;
+  font-family: "Cairo", ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
   line-height: 1.55;
 }
 
@@ -129,11 +146,35 @@ img{ max-width: 100%; display: block; }
 .muted{ margin: 0; color: var(--muted); }
 .page__tools{ margin-top: 12px; display: flex; gap: var(--s1); }
 
+/* ---------- Home Hero (NO home.js changes) ----------
+   Applies only when the page head is directly followed by the grid (home layout) */
+.page__head:has(+ .grid){
+  background: linear-gradient(135deg, var(--heroBg1), var(--heroBg2));
+  border-color: var(--heroBorder);
+  color: var(--heroText);
+  text-align: center;
+}
+
+.page__head:has(+ .grid) .h1{
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.2px;
+}
+
+.page__head:has(+ .grid) .muted{
+  color: var(--heroMuted);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
 /* ---------- Grid / Cards ---------- */
 .grid{
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: var(--s2);
+  margin-top: 18px; /* نزّل المربعات شوي */
 }
 @media (min-width: 720px){
   .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -146,14 +187,30 @@ img{ max-width: 100%; display: block; }
   box-shadow: var(--shadow2);
   padding: var(--s3);
 }
+
 .card--link{
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  text-align: center; /* العنوان بالنص */
 }
 .card--link:hover{
   transform: translateY(-1px);
   box-shadow: var(--shadow);
   border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
 }
+
+/* تكبير عنوان الكلية داخل المربع */
+.card--link .card__title{
+  font-weight: 900;
+  font-size: 22px;
+}
+.card--link .card__meta{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Keep defaults for non-link cards (if any) */
 .card__title{ font-weight: 800; font-size: 18px; }
 .card__meta{ margin-top: 6px; color: var(--muted); }
 
@@ -196,12 +253,8 @@ img{ max-width: 100%; display: block; }
 }
 .btn--primary:hover{ background: var(--primaryHover); }
 
-.btn--subtle{
-  background: var(--surface2);
-}
-.btn--ghost{
-  background: transparent;
-}
+.btn--subtle{ background: var(--surface2); }
+.btn--ghost{ background: transparent; }
 
 .btn--small{
   padding: 8px 10px;
@@ -287,12 +340,19 @@ img{ max-width: 100%; display: block; }
   border: 1px solid var(--border);
   background: var(--surface2);
   border-radius: 14px;
-  padding: 14px 14px;
+
+  /* bigger + nicer spacing */
+  padding: 16px 16px;
+
   display: grid;
   grid-template-columns: 44px 1fr;
   gap: 12px;
+
   cursor: pointer;
   transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+
+  /* center content vertically inside option */
+  align-items: center;
 }
 .opt:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); }
 .opt:active{ transform: translateY(0px); }
@@ -307,7 +367,20 @@ img{ max-width: 100%; display: block; }
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border: 1px solid var(--border);
 }
-.opt__text{ font-weight: 800; }
+
+.opt__text{
+  font-weight: 500;          /* ✅ مو بولد */
+  font-size: 18px;           /* ✅ اكبر شوي */
+  line-height: 1.35;
+
+  /* ✅ بالنص داخل الخانة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  min-height: 36px;
+}
 
 .opt--correct{
   background: color-mix(in srgb, var(--success) 18%, var(--surface2));
