@@ -4,17 +4,17 @@
 
 /* ---------- Design System ---------- */
 :root {
-  /* typography */
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Noto Sans", sans-serif;
-  line-height: 1.55;
+  /* Typography */
+  --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Noto Sans", sans-serif;
+  --line-height: 1.55;
 
-  /* layout */
+  /* Layout */
   --radius: 16px;
   --radius-sm: 12px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
 
-  /* Design system vars (LIGHT defaults) */
+  /* Colors: Light Theme Defaults */
   --bg: #f7f8fb;
   --surface: #ffffff;
   --surface2: #f1f3f9;
@@ -23,18 +23,19 @@
   --border: rgba(16, 24, 40, 0.12);
 
   --primary: #2b66ff;
-  --primaryHover: #1f55ea;
+  --primary-hover: #1f55ea;
   --success: #22a06b;
   --danger: #d94b4b;
-  --focusRing: rgba(43, 102, 255, 0.35);
+  --focus-ring: rgba(43, 102, 255, 0.35);
 
+  /* Rendering */
   color-scheme: light dark;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark theme via data-theme="dark" on <html> */
+/* Dark Theme Overrides */
 html[data-theme="dark"] {
   --bg: #0b1220;
   --surface: #0f1a2f;
@@ -44,12 +45,13 @@ html[data-theme="dark"] {
   --border: rgba(238, 242, 255, 0.14);
 
   --primary: #5b8cff;
-  --primaryHover: #7aa3ff;
+  --primary-hover: #7aa3ff;
   --success: #37c98d;
   --danger: #ff6b6b;
-  --focusRing: rgba(91, 140, 255, 0.35);
+  --focus-ring: rgba(91, 140, 255, 0.35);
 }
 
+/* Universal Resets */
 *,
 *::before,
 *::after {
@@ -73,14 +75,24 @@ body {
 }
 
 /* ---------- Utilities ---------- */
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
+
 .ltr {
   direction: ltr;
   unicode-bidi: plaintext;
   text-align: left;
 }
 
-/* ---------- App shell ---------- */
+/* Focus states for all clickable elements */
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--focus-ring);
+  border-color: rgba(43, 102, 255, 0.35);
+}
+
+/* ---------- App Shell ---------- */
 .app {
   max-width: 1100px;
   margin: 0 auto;
@@ -91,21 +103,17 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-
-  padding: 12px 12px;
+  padding: 12px;
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
 }
 
-.topbar__spacer { flex: 1; }
-
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-
   text-decoration: none;
   color: inherit;
 }
@@ -113,7 +121,6 @@ body {
 .brand__icon {
   width: 34px;
   height: 34px;
-  display: block;
 }
 
 .brand__text {
@@ -145,65 +152,6 @@ body {
   text-decoration: underline;
 }
 
-.crumb__sep {
-  color: var(--muted);
-}
-
-/* ---------- Hint (portrait small) ---------- */
-.hint-landscape {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 12px;
-  border: 1px dashed var(--border);
-  background: var(--surface2);
-  border-radius: var(--radius-sm);
-  color: var(--muted);
-  font-weight: 600;
-  text-align: center;
-}
-
-@media (max-width: 640px) and (orientation: portrait) {
-  .hint-landscape { display: block; }
-}
-
-/* ---------- Main ---------- */
-.main {
-  margin-top: 12px;
-}
-
-/* ---------- Cards ---------- */
-.card {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  padding: 16px;
-}
-
-.card__title {
-  font-size: 20px;
-  font-weight: 850;
-  margin: 0 0 8px 0;
-}
-
-.card__subtitle {
-  margin: 0;
-  color: var(--muted);
-}
-
-/* link card */
-.card--link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
-}
-.card--link:hover {
-  transform: translateY(-2px);
-  border-color: rgba(43, 102, 255, 0.35);
-  box-shadow: var(--shadow);
-}
-
 /* ---------- Buttons ---------- */
 .btn {
   border: 1px solid var(--border);
@@ -217,198 +165,26 @@ body {
   user-select: none;
 }
 
-.btn:hover { background: var(--primaryHover); }
-.btn:active { transform: translateY(1px); }
+.btn:hover {
+  background: var(--primary-hover);
+}
+
 .btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
+/* Ghost Button */
 .btn--ghost {
   background: transparent;
   color: var(--text);
 }
+
 .btn--ghost:hover {
   background: var(--surface2);
 }
 
-.btn:focus,
-.btn:focus-visible,
-a:focus,
-a:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px var(--focusRing);
-  border-color: rgba(43, 102, 255, 0.35);
-}
-
-/* ---------- Simple grid lists ---------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-@media (max-width: 900px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 560px) {
-  .grid { grid-template-columns: 1fr; }
-}
-
-/* ---------- Reader blocks (Question + Options) ---------- */
-.reader {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 12px;
-}
-
-@media (max-width: 900px) {
-  .reader { grid-template-columns: 1fr; }
-}
-
-.reader__main,
-.reader__aside {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Question box */
-.qbox {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: var(--shadow-sm);
-}
-
-.qbox__meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  color: var(--muted);
-  font-weight: 650;
-  margin-bottom: 10px;
-}
-
-.qbox__question {
-  font-size: 1.15rem;
-  font-weight: 750;
-  margin: 0;
-}
-
-/* Options list container */
-.options {
-  display: grid;
-  gap: 10px;
-}
-
-/* =========================================================
-   ✅ YOUR REQUEST: Option text centered + bigger
-   Works for common class names used in the app
-   ========================================================= */
-
-/* Option button/card */
-.option,
-.choice {
-  width: 100%;
-  text-align: right; /* container is RTL */
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 18px 16px;
-
-  display: flex;
-  align-items: center;       /* ✅ vertical center */
-  gap: 12px;
-
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
-}
-
-.option:hover,
-.choice:hover {
-  transform: translateY(-1px);
-  border-color: rgba(43, 102, 255, 0.35);
-}
-
-.option:active,
-.choice:active {
-  transform: translateY(0px);
-}
-
-.option[disabled],
-.choice[disabled] {
-  opacity: 0.85;
-  cursor: not-allowed;
-}
-
-/* A/B/C/D badge */
-.option__badge,
-.choice__badge,
-.option__key,
-.choice__key {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  flex: 0 0 46px;
-
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-
-  font-weight: 850;
-  color: var(--text);
-}
-
-/* Text inside option */
-.option__text,
-.choice__text,
-.option__label,
-.choice__label {
-  /* ✅ bigger + middle alignment */
-  font-size: 1.12rem;
-  line-height: 1.35;
-  font-weight: 550;          /* ✅ less bold than before */
-  align-self: center;
-}
-
-/* Make the English content LTR inside option text */
-.option__text.ltr,
-.choice__text.ltr,
-.option__label.ltr,
-.choice__label.ltr {
-  direction: ltr;
-  text-align: left;
-  unicode-bidi: plaintext;
-}
-
-/* Correct / Wrong states (support multiple class names) */
-.choice--correct,
-.option--correct,
-.is-correct {
-  border-color: rgba(34, 160, 107, 0.55);
-  background: rgba(34, 160, 107, 0.10);
-}
-.choice--wrong,
-.option--wrong,
-.is-wrong {
-  border-color: rgba(217, 75, 75, 0.55);
-  background: rgba(217, 75, 75, 0.10);
-}
-
-/* Reveal correct answer after wrong */
-.is-reveal-correct,
-.choice--reveal-correct,
-.option--reveal-correct {
-  border-color: rgba(34, 160, 107, 0.55);
-  background: rgba(34, 160, 107, 0.10);
-}
-
-/* ---------- Progress bar ---------- */
+/* ---------- Progress Bar ---------- */
 .progress {
   height: 10px;
   border-radius: 999px;
@@ -424,13 +200,21 @@ a:focus-visible {
   transition: width 160ms ease;
 }
 
-/* ---------- Small text tweaks for phones ---------- */
+/* ---------- Grids ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 560px) {
-  .app { padding: 12px; }
-  .option,
-  .choice { padding: 16px 14px; }
-  .option__text,
-  .choice__text,
-  .option__label,
-  .choice__label { font-size: 1.08rem; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
