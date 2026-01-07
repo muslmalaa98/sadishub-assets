@@ -25,6 +25,13 @@
   --s3: 24px;
   --s4: 32px;
 
+  /* Hero (mcq for all) - Light mode */
+  --heroBg1: #0b4a3f;   /* اخضر غامق */
+  --heroBg2: #073b4a;   /* ازرق غامق */
+  --heroBorder: rgba(255, 255, 255, 0.14);
+  --heroText: #ffffff;
+  --heroMuted: rgba(255, 255, 255, 0.78);
+
   color-scheme: light;
 }
 
@@ -41,6 +48,13 @@
   --success: #22c55e;
   --danger: #ef4444;
   --focusRing: rgba(96, 165, 250, 0.35);
+
+  /* Hero (mcq for all) - Dark mode */
+  --heroBg1: #0a3e4b;
+  --heroBg2: #072b38;
+  --heroBorder: rgba(255, 255, 255, 0.16);
+  --heroText: #ffffff;
+  --heroMuted: rgba(255, 255, 255, 0.78);
 
   color-scheme: dark;
 }
@@ -125,12 +139,6 @@ img{ max-width: 100%; display: block; }
   padding: var(--s3);
 }
 
-/* (طلبك) خلي مستطيل "mcq for all" مختلف عن باقي المربعات */
-.page__head{
-  background: color-mix(in srgb, var(--primary) 10%, var(--surface));
-  border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
-}
-
 .h1{
   margin: 0 0 6px 0;
   font-size: 22px;
@@ -139,16 +147,34 @@ img{ max-width: 100%; display: block; }
 .muted{ margin: 0; color: var(--muted); }
 .page__tools{ margin-top: 12px; display: flex; gap: var(--s1); }
 
+/* ---------- Hero (mcq for all) ---------- */
+.page__head--hero{
+  background: linear-gradient(135deg, var(--heroBg1), var(--heroBg2));
+  border-color: var(--heroBorder);
+  color: var(--heroText);
+  text-align: center;
+}
+
+.page__head--hero .h1{
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.2px;
+}
+
+.page__head--hero .muted{
+  color: var(--heroMuted);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
 /* ---------- Grid / Cards ---------- */
 .grid{
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: var(--s2);
-}
-
-/* (طلبك) نزّل المربعات شوي لتحت */
-.grid{
-  margin-top: 18px;
+  margin-top: 18px; /* نزّل المربعات شوي */
 }
 
 @media (min-width: 720px){
@@ -165,14 +191,15 @@ img{ max-width: 100%; display: block; }
 
 .card--link{
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  text-align: center; /* العنوان بالنص */
+}
+.card--link:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
 }
 
-/* (طلبك) خليه بالمنتصف داخل المربع */
-.card--link{
-  text-align: center;
-}
-
-/* (طلبك) خلي "طب/صيدلة/طب الأسنان" أكبر وأوضح */
+/* تكبير عنوان الكلية داخل المربع */
 .card--link .card__title{
   font-weight: 900;
   font-size: 22px;
@@ -182,12 +209,6 @@ img{ max-width: 100%; display: block; }
   color: var(--muted);
   font-size: 14px;
   opacity: 0.85;
-}
-
-.card--link:hover{
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
 }
 
 /* Keep defaults for non-link cards (if any) */
