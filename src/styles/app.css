@@ -1,3 +1,6 @@
+/* Cairo (Arabic UI font) */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap");
+
 /* ---------- Design Tokens ---------- */
 :root{
   --bg: #f6f7fb;
@@ -49,7 +52,7 @@ body{
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, "Noto Sans Arabic", sans-serif;
+  font-family: "Cairo", ui-sans-serif, system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
   line-height: 1.55;
 }
 
