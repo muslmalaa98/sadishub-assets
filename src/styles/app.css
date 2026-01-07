@@ -340,12 +340,19 @@ img{ max-width: 100%; display: block; }
   border: 1px solid var(--border);
   background: var(--surface2);
   border-radius: 14px;
-  padding: 14px 14px;
+
+  /* bigger + nicer spacing */
+  padding: 16px 16px;
+
   display: grid;
   grid-template-columns: 44px 1fr;
   gap: 12px;
+
   cursor: pointer;
   transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+
+  /* center content vertically inside option */
+  align-items: center;
 }
 .opt:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); }
 .opt:active{ transform: translateY(0px); }
@@ -360,7 +367,20 @@ img{ max-width: 100%; display: block; }
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   border: 1px solid var(--border);
 }
-.opt__text{ font-weight: 800; }
+
+.opt__text{
+  font-weight: 500;          /* ✅ مو بولد */
+  font-size: 18px;           /* ✅ اكبر شوي */
+  line-height: 1.35;
+
+  /* ✅ بالنص داخل الخانة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  min-height: 36px;
+}
 
 .opt--correct{
   background: color-mix(in srgb, var(--success) 18%, var(--surface2));
